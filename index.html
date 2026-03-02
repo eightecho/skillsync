@@ -1,458 +1,481 @@
+<!--
+  SkillSync — Mobile-first Landing Page (Expo West 2026)
+  - Single-file index.html for GitHub Pages
+  - Only 2 CTAs: Hero button + sticky footer button
+  - Benefit “checkboxes” use best-practice markup (separate icon element + text wrapper)
+  - UTM defaults (expowest2026 / qr / beta_launch) appended to the Google Form URL
+-->
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SkillSync Beta | Get noticed for the roles you actually want</title>
-  <meta name="description" content="SkillSync helps early-career CPG professionals get visibility with hiring teams and match to better-fit opportunities. Join the beta in 30 seconds. No resume required (yet)." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SkillSync — Early Access</title>
+  <meta name="description" content="SkillSync helps early-career CPG professionals stand out to hiring teams — without endlessly applying to jobs that go nowhere." />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SkillSync — Early Access" />
+  <meta property="og:description" content="Join once. Get matched to opportunities aligned with your growth." />
+  <meta property="og:type" content="website" />
 
   <style>
     :root{
-      --bg: #f6f8fb;
+      --bg: #fbfbfc;
       --card: #ffffff;
-      --text: #0f172a;
-      --muted: #475569;
-      --border: rgba(15, 23, 42, 0.12);
-      --primary: #2563eb;
-      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --text: #0e1116;
+      --muted: #5a6676;
+      --line: #e6e9ef;
+
+      --accent: #1a73e8;
+      --accentSoft: rgba(26,115,232,.12);
+      --accentBorder: rgba(26,115,232,.28);
+
+      --shadow: 0 10px 26px rgba(14,17,22,.08);
       --radius: 18px;
-      --max: 980px;
+      --radius2: 24px;
+
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+      --pad: 18px;     /* mobile-first */
+      --max: 920px;
     }
 
-    *{ box-sizing:border-box; }
+    @media (min-width: 820px){
+      :root{ --pad: 24px; }
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
+      font-family: var(--sans);
+      color: var(--text);
       background:
-        radial-gradient(800px 500px at 20% -10%, rgba(37,99,235,.12), transparent 60%),
-        radial-gradient(900px 600px at 90% 0%, rgba(16,185,129,.10), transparent 55%),
+        radial-gradient(900px 420px at 20% -10%, rgba(26,115,232,.08), transparent 55%),
+        radial-gradient(700px 380px at 90% 0%, rgba(26,115,232,.06), transparent 55%),
         var(--bg);
-      line-height:1.4;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      padding-bottom: 86px; /* room for sticky CTA */
     }
 
     a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
 
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:18px 16px 96px;
-    }
-
+    /* Header (no CTA up top) */
     header{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(251,251,252,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar{
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:14px;
+      gap: 12px;
+      padding: 12px 0;
     }
-
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
-      font-weight:800;
-      letter-spacing:.2px;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      white-space: nowrap;
+    }
+    .mark{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background:
+        radial-gradient(18px 18px at 35% 35%, rgba(255,255,255,.95), rgba(255,255,255,0) 62%),
+        linear-gradient(135deg, var(--accent), #1458b8);
+      box-shadow: 0 10px 22px rgba(26,115,232,.18);
+      flex: 0 0 auto;
     }
 
-    .logo{
-      width:36px;
-      height:36px;
-      border-radius:12px;
-      background: linear-gradient(135deg, #2563eb, #14b8a6);
-      position:relative;
-      box-shadow: 0 10px 18px rgba(37,99,235,.18);
-      overflow:hidden;
-      flex:0 0 auto;
+    main{ padding: 18px 0 28px; }
+
+    .panel{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding: 18px;
     }
-    /* simple “double S” mark */
-    .logo::before,
-    .logo::after{
-      content:"";
-      position:absolute;
-      left:8px; right:8px; top:8px; bottom:8px;
-      border-radius:999px;
-      border:4px solid rgba(255,255,255,.95);
-      opacity:.95;
-    }
-    .logo::before{
-      clip-path: polygon(0 0, 100% 0, 100% 44%, 0 44%);
-    }
-    .logo::after{
-      left:12px; right:12px; top:12px; bottom:12px;
-      clip-path: polygon(0 56%, 100% 56%, 100% 100%, 0 100%);
-      opacity:.85;
+    @media (min-width: 820px){
+      .panel{ padding: 24px; }
     }
 
-    .pill{
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid var(--border);
-      padding:8px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.7);
-      backdrop-filter: blur(8px);
-      white-space:nowrap;
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .9px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .kicker-badge{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accentSoft);
+      flex: 0 0 auto;
     }
 
+    h1{
+      margin: 12px 0 10px;
+      font-size: clamp(30px, 6vw, 46px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    .lead{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* Hero CTA (single) */
+    .hero-cta{
+      display:grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      padding:12px 16px;
-      border-radius:999px;
-      font-weight:800;
-      border:1px solid transparent;
-      cursor:pointer;
-      background: var(--primary);
-      color:#fff;
-      box-shadow: 0 12px 22px rgba(37,99,235,.22);
-      transition: transform .06s ease, filter .12s ease;
-      white-space:nowrap;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-weight: 800;
+      font-size: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      cursor: pointer;
+      user-select:none;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      width: 100%;
     }
-    .btn:hover{ filter:brightness(1.03); }
-    .btn:active{ transform: translateY(1px); }
-
-    .btn.secondary{
-      background:#fff;
-      color:var(--text);
-      border-color:var(--border);
-      box-shadow:none;
-      font-weight:800;
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 8px 18px rgba(14,17,22,.08); border-color: rgba(14,17,22,.14); }
+    .btn.primary{
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(26,115,232,.16);
     }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:16px;
-      align-items:start;
-    }
-
-    .card{
-      background: rgba(255,255,255,.85);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:18px;
-    }
-
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      margin-bottom:10px;
-    }
-    .dot{
-      width:10px;
-      height:10px;
-      border-radius:999px;
-      background: linear-gradient(135deg, #2563eb, #14b8a6);
-    }
-
-    h1{
-      margin:0 0 10px;
-      font-size:34px;
-      line-height:1.05;
-      letter-spacing:-0.02em;
-    }
-    .sub{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:16px;
-      max-width: 62ch;
-    }
-
-    .cta-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin: 10px 0 14px;
-    }
+    .btn.primary:hover{ box-shadow: 0 18px 36px rgba(26,115,232,.18); }
+    .btn:focus-visible{ outline: 3px solid var(--accentSoft); outline-offset: 2px; }
 
     .micro{
-      font-size:13px;
-      color:var(--muted);
-      margin-top:8px;
+      font-size: 13px;
+      color: var(--muted);
     }
 
+    /* Benefit checklist (best-practice structure) */
     .benefits{
       display:grid;
-      gap:10px;
-      margin-top: 12px;
+      gap: 12px;
+      margin-top: 18px;
     }
     .benefit{
-      background: rgba(248,250,252,.9);
-      border:1px solid var(--border);
+      display:flex;
+      align-items:stretch; /* key: icon stretches to match text block height */
+      gap: 14px;
+      padding: 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .benefit-icon{
+      width: 46px;
+      align-self: stretch; /* key: full height */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
       border-radius: 14px;
-      padding:12px;
-      font-size:14px;
-    }
-    .benefit b{ display:block; margin-bottom:2px; }
-    .benefit span{ color:var(--muted); font-size:13px; }
+      background: var(--accentSoft);
+      border: 1px solid var(--accentBorder);
+      color: #124a97;
 
-    .section-title{
-      margin:0 0 10px;
-      font-size:18px;
-      letter-spacing:-0.01em;
+      flex: 0 0 auto;
+    }
+    .benefit-icon svg{
+      width: 22px;
+      height: 22px;
+      display:block;
+    }
+    .benefit-text b{
+      display:block;
+      font-size: 18px;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .benefit-text span{
+      display:block;
+      color: var(--muted);
+      font-size: 14px;
     }
 
+    /* Secondary content (no CTAs inside) */
+    .stack{
+      display:grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .card{
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 16px;
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    .card p{ margin:0; color: var(--muted); font-size: 14px; }
     ul{
       margin: 10px 0 0;
       padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
     }
-    li{ margin: 6px 0; color: var(--text); }
-    li span{ color: var(--muted); }
+    li{ margin: 6px 0; }
 
-    .steps{
-      display:grid;
-      gap:10px;
-      margin-top: 10px;
-    }
+    .steps{ display:grid; gap: 10px; margin-top: 10px; }
     .step{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      background: rgba(248,250,252,.9);
-      border:1px solid var(--border);
+      display:grid;
+      grid-template-columns: 28px 1fr;
+      gap: 10px;
+      align-items:start;
+      padding: 12px;
       border-radius: 14px;
-      padding:12px;
+      border: 1px solid var(--line);
+      background: #fff;
     }
     .num{
-      width:28px;
-      height:28px;
-      border-radius:999px;
-      background: rgba(37,99,235,.12);
-      border:1px solid rgba(37,99,235,.22);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:900;
-      color: var(--primary);
-      flex:0 0 auto;
-      margin-top:1px;
-    }
-    .step b{ display:block; font-size:14px; margin-bottom:2px; }
-    .step small{ color: var(--muted); font-size:13px; display:block; }
-
-    details{
-      background: rgba(248,250,252,.9);
-      border:1px solid var(--border);
-      border-radius: 14px;
-      padding:10px 12px;
-    }
-    summary{
-      cursor:pointer;
-      font-weight:800;
-      font-size:14px;
-      list-style:none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    details p{ margin:8px 0 0; font-size:13px; color: var(--muted); }
-
-    footer{
-      text-align:center;
-      color: var(--muted);
-      font-size:12px;
-      margin-top: 16px;
-    }
-
-    .sticky{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      background: rgba(255,255,255,.86);
-      border-top:1px solid var(--border);
-      backdrop-filter: blur(10px);
-      padding:10px 12px;
-      display:flex;
-      justify-content:center;
-      z-index:50;
-    }
-    .sticky .btn{ width:min(560px, 92vw); }
-
-    
-    /* Mobile-first: keep single-column layout and make key CTAs easy to tap */
-    @media (max-width: 859px){
-      .cta{ display:grid; gap:10px; }
-      .cta .btn{ width:100%; }
-    }
-
-@media (min-width: 860px){
-      .wrap{ padding-bottom: 40px; }
-      h1{ font-size:44px; }
-      .sticky{ display:none; }
-    }
-  
-    /* Header safety (mobile): prevent right-side pill from clipping */
-    .topbar{ gap:12px; }
-    .pill{
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    @media (max-width: 520px){
-      header{ padding-bottom: 2px; }
-      .topbar{ padding: 10px 0; }
-      .brand{ gap: 10px; }
-      .pill{ font-size: 12px; padding: 8px 10px; }
-    }
-
-
-    /* Checklist icon (left) */
-    .icon{
-      width: 22px;
-      height: 22px;
-      border-radius: 8px;
-      display: grid;
-      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 11px;
+      display:grid;
+      place-items:center;
+      font-family: var(--mono);
+      font-size: 12px;
       background: var(--accentSoft);
       color: #124a97;
       border: 1px solid var(--accentBorder);
-      flex: 0 0 auto;
-      margin-top: 1px;
+    }
+    .step b{ display:block; font-size: 14px; margin-bottom: 2px; }
+    .step span{ display:block; font-size: 13px; color: var(--muted); }
+
+    footer{
+      margin-top: 16px;
+      border-top: 1px solid var(--line);
+      padding: 14px 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
     }
 
-</style>
+    /* Sticky footer CTA (second and last CTA) */
+    .sticky{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 30;
+      background: rgba(251,251,252,.94);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--line);
+      padding: 10px 0;
+    }
+    .sticky .wrap{ display:flex; gap: 10px; align-items:center; }
+    .sticky .btn{ width: 100%; padding: 14px 16px; }
+  </style>
 </head>
 
 <body>
-  <!-- Put your Google Form link here once, and it’s used everywhere -->
-  <script>
-  // Google Form base (we'll append UTM params automatically)
-  window.SKILLSYNC_FORM_BASE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfOmXytml4p1ZzapaBopAgTr2N7qdNKCsn5plunJmCn5u-PAw/viewform?usp=pp_url";
-</script>
-
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>SkillSync</div>
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <div class="mark" aria-hidden="true"></div>
+          <div>SkillSync</div>
+        </div>
       </div>
+    </div>
+  </header>
 
-      <div style="display:flex; align-items:center; gap:10px;">
-</div>
-    </header>
+  <main>
+    <div class="wrap">
+      <section class="panel" aria-label="Hero">
+        <div class="kicker">
+          <span class="kicker-badge" aria-hidden="true"></span>
+          Recruiter-guided beta for early-career CPG
+        </div>
 
-    <main class="grid">
-      <!-- HERO -->
-      <section class="card" aria-labelledby="heroTitle">
-        <div class="kicker"><span class="dot"></span> Recruiter-guided beta for early-career CPG</div>
-        <h1 id="heroTitle">Get noticed for the roles you actually want.</h1>
-        <p class="sub">
+        <h1>Get noticed for the roles you actually want.</h1>
+
+        <p class="lead">
           SkillSync helps early-career CPG professionals (1–7 years) stand out to hiring teams — without endlessly applying to jobs that go nowhere.
           Join once. Get matched to opportunities aligned with your growth.
         </p>
 
-        <div class="cta-row">
-          <a class="btn" id="primaryCta" href="#" target="_blank" rel="noopener">Get Early Access</a>
-</div>
-        <div class="micro">Takes 30 seconds • No resume required (yet)</div>
+        <!-- CTA #1 -->
+        <div class="hero-cta">
+          <a class="btn primary" id="primaryCta" href="#" target="_blank" rel="noopener">Get Early Access</a>
+          <div class="micro">Takes 30 seconds • No resume required (yet)</div>
+        </div>
 
-        <div class="benefits">
+        <div class="benefits" aria-label="Key benefits">
           <div class="benefit">
-            ✅ <b>Get visibility with hiring teams</b>
-            <span>Be seen earlier, not buried in the pile.</span>
+            <div class="benefit-icon" aria-hidden="true">
+              <!-- Check icon (scales cleanly, consistent in print/screenshot) -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9.2 16.4 5.6 12.8 4.2 14.2 9.2 19.2 20.2 8.2 18.8 6.8 9.2 16.4Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="benefit-text">
+              <b>Get visibility with hiring teams</b>
+              <span>Be seen earlier, not buried in the pile.</span>
+            </div>
           </div>
+
           <div class="benefit">
-            ✅ <b>Be considered for better-fit roles</b>
-            <span>Aligned with your skills and trajectory.</span>
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9.2 16.4 5.6 12.8 4.2 14.2 9.2 19.2 20.2 8.2 18.8 6.8 9.2 16.4Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="benefit-text">
+              <b>Be considered for better-fit roles</b>
+              <span>Aligned with your skills and trajectory.</span>
+            </div>
           </div>
+
           <div class="benefit">
-            ✅ <b>Spend less time applying</b>
-            <span>One signup → we handle the matching over time.</span>
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9.2 16.4 5.6 12.8 4.2 14.2 9.2 19.2 20.2 8.2 18.8 6.8 9.2 16.4Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="benefit-text">
+              <b>Spend less time applying</b>
+              <span>One signup → we handle the matching over time.</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- RIGHT COLUMN -->
-      <aside class="card">
-        <h2 class="section-title">Who it’s for</h2>
-        <p style="margin:0; color:var(--muted); font-size:14px;">
-          Early-career CPG professionals ready for growth.
-        </p>
-        <ul>
-          <li>Buyers & assistant buyers</li>
-          <li>Sales reps & account coordinators</li>
-          <li>Category or operations roles</li>
-          <li><span>Typically 1–7 years experience</span></li>
-        </ul>
-
-        <div style="height:12px;"></div>
-<div class="micro">Opens the quick Google Form in a new tab.</div>
-      </aside>
-    </main>
-
-    <section class="card" id="how" style="margin-top:16px;">
-      <h2 class="section-title">How it works</h2>
-      <p style="margin:0; color:var(--muted); font-size:14px;">
-        We keep the first step fast, then invite selected members into deeper intake as cohorts open.
-      </p>
-
-      <div class="steps">
-        <div class="step">
-          <div class="num">1</div>
-          <div><b>Join the beta</b><small>Quick form to gauge fit and goals.</small></div>
+      <section class="stack" aria-label="Details">
+        <div class="card" id="who">
+          <h2>Who it’s for</h2>
+          <p>Early-career professionals in the CPG food industry.</p>
+          <ul>
+            <li>Buyers, assistant buyers</li>
+            <li>Sales reps, account or category coordinators</li>
+            <li>Typically 1–7 years of experience</li>
+            <li>Open to new opportunities or growth</li>
+          </ul>
         </div>
-        <div class="step">
-          <div class="num">2</div>
-          <div><b>Recruiter review</b><small>We prioritize early-career CPG roles first.</small></div>
+
+        <div class="card" id="how">
+          <h2>How the beta works</h2>
+          <div class="steps">
+            <div class="step">
+              <div class="num">1</div>
+              <div>
+                <b>Join the beta list</b>
+                <span>Quick signup to gauge interest and fit.</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">2</div>
+              <div>
+                <b>Recruiter review</b>
+                <span>We prioritize early-career CPG roles first.</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">3</div>
+              <div>
+                <b>Next-step intake later</b>
+                <span>Resume + deeper details come when the cohort is ready.</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="step">
-          <div class="num">3</div>
-          <div><b>Invite to next phase</b><small>Selected members complete deeper intake later.</small></div>
+
+        <div class="card" id="faq">
+          <h2>FAQ</h2>
+          <div class="steps">
+            <div class="step">
+              <div class="num">Q</div>
+              <div>
+                <b>Is SkillSync a job board?</b>
+                <span>No. It’s a recruiter-guided beta focused on better matching and visibility.</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">Q</div>
+              <div>
+                <b>Do you guarantee placement?</b>
+                <span>No. Beta is for early access and consideration; outcomes depend on fit and openings.</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">Q</div>
+              <div>
+                <b>Why not collect resumes now?</b>
+                <span>We’re keeping signup low-friction. Deeper intake comes later.</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="step">
-          <div class="num">4</div>
-          <div><b>Get surfaced for matches</b><small>When roles fit, you’re considered with stronger context than a cold application.</small></div>
+      </section>
+
+      <footer>
+        <div class="foot">
+          <div>© <span id="year"></span> SkillSync</div>
+          <div>Expo West 2026 • Early access beta</div>
         </div>
-      </div>
+      </footer>
+    </div>
+  </main>
 
-      <div style="height:12px;"></div>
-<div class="micro">Takes 30 seconds • No resume required (yet)</div>
-    </section>
-
-    <section class="card" style="margin-top:16px;">
-      <h2 class="section-title">FAQ</h2>
-      <div class="steps">
-        <details>
-          <summary>Is SkillSync a job board?</summary>
-          <p>No. SkillSync is a recruiter-guided platform designed to help early-career CPG professionals get visibility and better-fit matching—without endless applying.</p>
-        </details>
-        <details>
-          <summary>Do you guarantee placement?</summary>
-          <p>No. Outcomes depend on fit and active openings. The goal is to improve your visibility, alignment, and consideration for roles.</p>
-        </details>
-        <details>
-          <summary>Why not collect resumes now?</summary>
-          <p>We keep signup low-friction. Once you’re selected for the next phase, we’ll invite you to complete your profile and resume intake.</p>
-        </details>
-        <details>
-          <summary>What info do you collect today?</summary>
-          <p>Basic contact details and a few quick signals about your experience and goals. Nothing heavy.</p>
-        </details>
-      </div>
-    </section>
-
-    <footer>
-      © <span id="year"></span> SkillSync • 30-second signup • No resume required (yet)
-    </footer>
-  </div>
-
-  <!-- Sticky mobile CTA -->
+  <!-- CTA #2 (sticky) -->
   <div class="sticky" role="region" aria-label="Sticky call to action">
-    <a class="btn" id="stickyCta" href="#" target="_blank" rel="noopener">Get Early Access</a>
+    <div class="wrap">
+      <a class="btn primary" id="stickyCta" href="#" target="_blank" rel="noopener">Get Early Access</a>
+    </div>
   </div>
 
   <script>
     // Set year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // UTM defaults for this event (kept minimal on purpose)
+    // Google Form base
+    const FORM_BASE_URL =
+      "https://docs.google.com/forms/d/e/1FAIpQLSfOmXytml4p1ZzapaBopAgTr2N7qdNKCsn5plunJmCn5u-PAw/viewform?usp=pp_url";
+
+    // Minimal UTM defaults for this event
     const DEFAULT_UTM = {
       utm_source: "expowest2026",
       utm_medium: "qr",
@@ -463,7 +486,7 @@
       const qs = new URLSearchParams(window.location.search);
       const utm = { ...DEFAULT_UTM };
 
-      // Only overwrite defaults if values exist in the URL
+      // Overwrite defaults only if present
       ["utm_source","utm_medium","utm_campaign"].forEach(k => {
         const v = qs.get(k);
         if (v && v.trim().length) utm[k] = v.trim();
@@ -471,18 +494,14 @@
 
       const out = new URLSearchParams();
       Object.entries(utm).forEach(([k,v]) => out.set(k, v));
-      return out;
+      return out.toString();
     }
 
-    // Build the final Google Form URL with UTM passthrough.
-    // Note: Google Forms will ignore these unless you later add hidden fields + prefill IDs,
-    // but keeping them on the URL preserves attribution for future upgrades.
-    const utmParams = buildUtmParams();
-    const base = window.SKILLSYNC_FORM_BASE_URL;
-    const formUrl = base + "&" + utmParams.toString();
+    // Final form URL (UTMs carried forward)
+    const formUrl = FORM_BASE_URL + "&" + buildUtmParams();
 
-    // Wire all CTAs to the same Google Form URL
-    ["topCta","primaryCta","sideCta","bottomCta","stickyCta"].forEach(id => {
+    // Wire the only CTAs
+    ["primaryCta","stickyCta"].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.href = formUrl;
     });
