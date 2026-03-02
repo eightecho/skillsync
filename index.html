@@ -1,551 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SkillSync Beta | Get noticed for the roles you actually want</title>
-  <meta name="description" content="SkillSync helps early-career CPG professionals get visibility with hiring teams and match to better-fit opportunities. Join the beta in 30 seconds. No resume required." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillSync Beta</title>
 
-  <style>
-    :root{
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --text: #0f172a;      /* slate-900 */
-      --muted: #475569;     /* slate-600 */
-      --border: rgba(15, 23, 42, 0.10);
-      --primary: #2563eb;   /* blue-600 */
-      --primary2:#14b8a6;   /* teal-500 */
-      --ring: rgba(37, 99, 235, 0.25);
-      --shadow: 0 10px 28px rgba(15, 23, 42, .08);
-      --radius: 18px;
-      --max: 980px;
-      --gap: 16px;
-    }
+<style>
 
-    * { box-sizing: border-box; }
-    body{
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--text);
-      background:
-        radial-gradient(800px 500px at 20% -10%, rgba(20,184,166,.20), transparent 60%),
-        radial-gradient(900px 600px at 90% 0%, rgba(37,99,235,.18), transparent 55%),
-        var(--bg);
-      line-height: 1.35;
-    }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f5f7fb;
+  color: #0f172a;
+  line-height: 1.4;
+}
 
-    a { color: inherit; text-decoration: none; }
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 18px 16px 110px; }
-    header{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 12px; padding: 6px 2px 12px;
-    }
-    .brand{
-      display:flex; align-items:center; gap: 10px; font-weight: 700; letter-spacing: .2px;
-    }
-    .logo{
-      width: 36px; height: 36px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--primary), var(--primary2));
-      box-shadow: 0 8px 18px rgba(37,99,235,.15);
-      position: relative;
-      overflow: hidden;
-    }
-    /* simple double-S mark */
-    .logo::before, .logo::after{
-      content:"";
-      position:absolute;
-      inset: 8px;
-      border-radius: 999px;
-      border: 4px solid rgba(255,255,255,.95);
-      clip-path: polygon(0 0, 100% 0, 100% 42%, 0 42%);
-      transform: rotate(0deg);
-    }
-    .logo::after{
-      inset: 12px;
-      clip-path: polygon(0 58%, 100% 58%, 100% 100%, 0 100%);
-      opacity: .9;
-    }
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
 
-    .top-cta{
-      display:flex; align-items:center; gap: 10px;
-    }
-    .pill{
-      font-size: 12px; color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.6);
-      backdrop-filter: blur(6px);
-    }
-    .btn{
-      appearance:none; border: 0; cursor:pointer;
-      padding: 12px 14px;
-      border-radius: 999px;
-      font-weight: 700;
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 10px 18px rgba(37,99,235,.20);
-      transition: transform .06s ease, filter .12s ease;
-      white-space: nowrap;
-    }
-    .btn:hover{ filter: brightness(1.02); }
-    .btn:active{ transform: translateY(1px); }
-    .btn.secondary{
-      background: #fff; color: var(--text);
-      border: 1px solid var(--border);
-      box-shadow: none;
-    }
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  margin-bottom: 16px;
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
 
-    .hero{
-      padding: 18px;
-      background: rgba(255,255,255,.75);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
+.subtext {
+  color: #475569;
+  margin-bottom: 20px;
+}
 
-    .kicker{
-      display:inline-flex;
-      gap: 10px;
-      align-items:center;
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .dot{
-      width: 10px; height: 10px; border-radius: 999px;
-      background: linear-gradient(135deg, var(--primary), var(--primary2));
-    }
+.kicker {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #64748b;
+  margin-bottom: 10px;
+}
 
-    h1{
-      margin: 0 0 10px;
-      font-size: 34px;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-    }
-    .sub{
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 60ch;
-    }
+.btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #2563eb;
+  color: white;
+  padding: 14px;
+  border-radius: 999px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 12px;
+}
 
-    .bullets{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin: 16px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-    .bullets li{
-      background: rgba(255,255,255,.75);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 12px;
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-    }
-    .check{
-      width: 22px; height: 22px; border-radius: 999px;
-      background: rgba(20,184,166,.16);
-      display:flex; align-items:center; justify-content:center;
-      border: 1px solid rgba(20,184,166,.35);
-      flex: 0 0 auto;
-      margin-top: 1px;
-    }
-    .check svg{ width: 14px; height: 14px; fill: var(--primary2); }
-    .bullets strong{ display:block; font-size: 14px; margin-bottom: 2px; }
-    .bullets span{ color: var(--muted); font-size: 13px; }
+.benefit {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
 
-    .card{
-      background: rgba(255,255,255,.86);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      box-shadow: var(--shadow);
-    }
-    .card h2{
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: -0.01em;
-    }
-    .card p{ margin: 0; color: var(--muted); font-size: 14px; }
+.section-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
 
-    .two{
-      display:grid;
-      gap: 16px;
-      grid-template-columns: 1fr;
-    }
+.step {
+  margin-bottom: 10px;
+}
 
-    .steps{ margin: 10px 0 0; display:grid; gap: 10px; }
-    .step{
-      display:flex; gap: 12px; align-items:flex-start;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px;
-      background: rgba(255,255,255,.65);
-    }
-    .num{
-      width: 28px; height: 28px; border-radius: 999px;
-      background: rgba(37,99,235,.12);
-      border: 1px solid rgba(37,99,235,.22);
-      display:flex; align-items:center; justify-content:center;
-      font-weight: 800;
-      color: var(--primary);
-      flex: 0 0 auto;
-    }
-    .step b{ display:block; font-size: 14px; margin-bottom: 2px; }
-    .step small{ color: var(--muted); font-size: 13px; display:block; }
+form input, form select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
 
-    form{
-      display:grid;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    label{ font-size: 13px; color: var(--muted); font-weight: 600; }
-    input, select, textarea{
-      width: 100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.9);
-      font-size: 16px;
-      outline: none;
-    }
-    input:focus, select:focus, textarea:focus{
-      border-color: rgba(37,99,235,.55);
-      box-shadow: 0 0 0 6px var(--ring);
-    }
-    .row{
-      display:grid;
-      gap: 10px;
-      grid-template-columns: 1fr;
-    }
-    .fine{
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .fine a{ text-decoration: underline; }
-    .submit-row{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      flex-wrap: wrap;
-      margin-top: 2px;
-    }
+footer {
+  text-align: center;
+  color: #64748b;
+  font-size: 12px;
+  margin-top: 20px;
+}
 
-    details{
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: rgba(255,255,255,.65);
-      padding: 10px 12px;
-    }
-    summary{
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 14px;
-      outline: none;
-      list-style: none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    details p{ margin: 8px 0 0; font-size: 13px; color: var(--muted); }
-
-    .sticky{
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      background: rgba(255,255,255,.80);
-      border-top: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-      padding: 10px 12px;
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      justify-content: center;
-      z-index: 50;
-    }
-    .sticky .btn{ width: min(560px, 92vw); }
-
-    footer{
-      margin-top: 18px;
-      padding: 16px 4px 0;
-      color: var(--muted);
-      font-size: 12px;
-      text-align: center;
-    }
-
-    /* Desktop enhancements */
-    @media (min-width: 860px){
-      .wrap{ padding-bottom: 70px; }
-      .grid{ grid-template-columns: 1.1fr .9fr; align-items:start; }
-      h1{ font-size: 44px; }
-      .two{ grid-template-columns: 1fr 1fr; }
-      .row{ grid-template-columns: 1fr 1fr; }
-      .sticky{ display:none; }
-    }
-  </style>
+</style>
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>SkillSync</div>
-      </div>
-      <div class="top-cta">
-        <div class="pill">30-second signup • No resume required (yet)</div>
-        <a class="btn" href="#join">Join Beta</a>
-      </div>
-    </header>
 
-    <main class="grid">
-      <!-- LEFT: Hero -->
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="kicker"><span class="dot"></span> Recruiter-guided beta for early-career CPG</div>
-        <h1 id="hero-title">Get noticed for the roles you actually want.</h1>
-        <p class="sub">
-          SkillSync helps early-career CPG professionals (1–7 years) stand out to hiring teams—without endlessly applying to jobs that go nowhere.
-          Join once. Get matched to opportunities aligned with your growth.
-        </p>
+<div class="container">
 
-        <div class="submit-row">
-          <a class="btn" href="#join">Join the SkillSync Beta</a>
-          <a class="btn secondary" href="#how">How it works</a>
-        </div>
+<div class="card">
+<div class="kicker">Recruiter-guided beta for early-career CPG</div>
 
-        <ul class="bullets" aria-label="Key benefits">
-          <li>
-            <div class="check" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9.0 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-            </div>
-            <div>
-              <strong>More visibility with hiring teams</strong>
-              <span>Be seen earlier, not buried in a pile of applicants.</span>
-            </div>
-          </li>
-          <li>
-            <div class="check" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9.0 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-            </div>
-            <div>
-              <strong>Smarter matching to better-fit roles</strong>
-              <span>Opportunities that align with your skills and trajectory.</span>
-            </div>
-          </li>
-          <li>
-            <div class="check" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9.0 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-            </div>
-            <div>
-              <strong>Less job-search burnout</strong>
-              <span>Join once, and we’ll handle the signal-building and fit over time.</span>
-            </div>
-          </li>
-        </ul>
-      </section>
+<h1>Get noticed for the roles you actually want.</h1>
 
-      <!-- RIGHT: Signup Form -->
-      <aside class="card" id="join" aria-labelledby="join-title">
-        <h2 id="join-title">Join the SkillSync Beta</h2>
-        <p>Share a few quick details to gauge fit. Selected members will be invited to complete a full profile later.</p>
+<div class="subtext">
+SkillSync helps early-career CPG professionals (1–7 years) stand out to hiring teams — without endlessly applying to jobs that go nowhere.
+</div>
 
-        <!--
-          FORM OPTIONS:
-          1) Formspree (easy, no backend): https://formspree.io/
-             - Create a form and replace action with your endpoint.
-          2) Your own endpoint: set action="/api/lead" method="POST"
-        -->
-        <form action="https://formspree.io/f/yourFormID" method="POST">
-          <div class="row">
-            <div>
-              <label for="firstName">First name</label>
-              <input id="firstName" name="firstName" autocomplete="given-name" required />
-            </div>
-            <div>
-              <label for="lastName">Last name</label>
-              <input id="lastName" name="lastName" autocomplete="family-name" required />
-            </div>
-          </div>
+<a class="btn" href="#join">Join the SkillSync Beta</a>
 
-          <div>
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" required />
-          </div>
+<div class="benefit">
+✔ Get visibility with hiring teams
+</div>
 
-          <div>
-            <label for="location">Location (city/state)</label>
-            <input id="location" name="location" placeholder="e.g., Chicago, IL" />
-          </div>
+<div class="benefit">
+✔ Be considered for better-fit roles
+</div>
 
-          <div class="row">
-            <div>
-              <label for="years">Years of experience</label>
-              <select id="years" name="yearsExperience" required>
-                <option value="" disabled selected>Select</option>
-                <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option>
-                <option>8+</option>
-              </select>
-            </div>
-            <div>
-              <label for="function">Current function</label>
-              <select id="function" name="function" required>
-                <option value="" disabled selected>Select</option>
-                <option>Buying / Merchandising</option>
-                <option>Sales</option>
-                <option>Account Management</option>
-                <option>Category / Trade</option>
-                <option>Operations / Supply Chain</option>
-                <option>Marketing</option>
-                <option>Finance / Analyst</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
+<div class="benefit">
+✔ Spend less time applying
+</div>
 
-          <div>
-            <label for="interest">What are you looking for next?</label>
-            <select id="interest" name="nextStep" required>
-              <option value="" disabled selected>Select</option>
-              <option>Promotion / step up</option>
-              <option>Lateral move with better growth</option>
-              <option>New company / new industry segment</option>
-              <option>Open to the right role</option>
-            </select>
-          </div>
+</div>
 
-          <div>
-            <label for="roles">Roles of interest (optional)</label>
-            <input id="roles" name="rolesOfInterest" placeholder="e.g., Assistant Buyer, Account Coordinator" />
-          </div>
+<div class="card">
+<div class="section-title">Who it's for</div>
 
-          <div>
-            <label for="note">Anything we should know? (optional)</label>
-            <textarea id="note" name="note" rows="3" placeholder="Your goals, target brands, ideal roles, etc."></textarea>
-          </div>
+Early-career CPG professionals ready for growth.
 
-          <!-- Honeypot (spam protection) -->
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+<ul>
+<li>Buyers & assistant buyers</li>
+<li>Sales reps & account coordinators</li>
+<li>Category or operations roles</li>
+<li>Typically 1–7 years experience</li>
+</ul>
 
-          <div class="submit-row">
-            <button class="btn" type="submit">Join Beta</button>
-            <span class="fine">No resume required at signup.</span>
-          </div>
+</div>
 
-          <div class="fine">
-            By joining, you agree to be contacted about beta access. We won’t sell your info.
-            <a href="#faq">Read FAQs</a>.
-          </div>
-        </form>
-      </aside>
-    </main>
+<div class="card">
+<div class="section-title">How it works</div>
 
-    <section class="two" style="margin-top: 16px;">
-      <div class="card" id="who">
-        <h2>Who it’s for</h2>
-        <p>
-          Early-career professionals in Consumer Packaged Goods (CPG) who want more momentum in their career — and are open to the right next role.
-        </p>
-        <div class="steps" aria-label="Audience examples">
-          <div class="step">
-            <div class="num">✓</div>
-            <div><b>Typical roles</b><small>Buyers / assistant buyers, sales reps, account coordinators, category & operations roles.</small></div>
-          </div>
-          <div class="step">
-            <div class="num">✓</div>
-            <div><b>Experience</b><small>Usually 1–7 years (if you’re close, still join).</small></div>
-          </div>
-          <div class="step">
-            <div class="num">✓</div>
-            <div><b>Mindset</b><small>High performers looking for growth, not just change.</small></div>
-          </div>
-        </div>
-      </div>
+<div class="step">1. Join the beta</div>
+<div class="step">2. Recruiter review</div>
+<div class="step">3. Invite to next phase</div>
+<div class="step">4. Get surfaced for matches</div>
 
-      <div class="card" id="how">
-        <h2>How the beta works</h2>
-        <p>We keep the first step fast, then invite selected members into deeper intake as cohorts open.</p>
-        <div class="steps">
-          <div class="step">
-            <div class="num">1</div>
-            <div><b>Join the beta list</b><small>Quick form to gauge fit and your goals.</small></div>
-          </div>
-          <div class="step">
-            <div class="num">2</div>
-            <div><b>Recruiter review</b><small>We prioritize early-career CPG roles first.</small></div>
-          </div>
-          <div class="step">
-            <div class="num">3</div>
-            <div><b>Invite to next phase</b><small>Selected members complete a deeper profile and resume intake later.</small></div>
-          </div>
-          <div class="step">
-            <div class="num">4</div>
-            <div><b>Get surfaced for matches</b><small>When openings fit, you’ll be considered with stronger context than a cold application.</small></div>
-          </div>
-        </div>
-      </div>
-    </section>
+</div>
 
-    <section class="card" id="faq" style="margin-top: 16px;">
-      <h2>FAQ</h2>
+<div class="card" id="join">
+<div class="section-title">Join Beta</div>
 
-      <div class="steps">
-        <details>
-          <summary>Is SkillSync a job board?</summary>
-          <p>No. SkillSync is a recruiter-guided platform designed to help early-career CPG professionals get visibility and better-fit matching—without endless applying.</p>
-        </details>
+<form action="https://formspree.io/f/yourFormID" method="POST">
 
-        <details>
-          <summary>Do you guarantee placement?</summary>
-          <p>No. Outcomes depend on fit and active openings. The goal is to improve your visibility, alignment, and consideration for roles.</p>
-        </details>
+<label>First Name</label>
+<input type="text" name="firstName" required>
 
-        <details>
-          <summary>Why not collect resumes now?</summary>
-          <p>We keep signup low-friction. Once you’re selected for the next phase, we’ll invite you to complete your profile and resume intake.</p>
-        </details>
+<label>Email</label>
+<input type="email" name="email" required>
 
-        <details>
-          <summary>What info do you collect today?</summary>
-          <p>Basic contact details and a few quick signals about your experience and goals. Nothing heavy.</p>
-        </details>
-      </div>
-    </section>
+<label>Years of Experience</label>
+<select name="experience" required>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+<option>6</option>
+<option>7+</option>
+</select>
 
-    <footer>
-      © <span id="year"></span> SkillSync. All rights reserved.
-    </footer>
-  </div>
+<button class="btn" type="submit">Join Beta</button>
 
-  <div class="sticky" role="region" aria-label="Sticky call to action">
-    <a class="btn" href="#join">Join the SkillSync Beta</a>
-  </div>
+</form>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+</div>
 
-    // Smooth scrolling for in-page anchors (mobile-friendly)
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener("click", e => {
-        const id = a.getAttribute("href");
-        const el = document.querySelector(id);
-        if (!el) return;
-        e.preventDefault();
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
-  </script>
+<footer>
+30-second signup • No resume required (yet)
+</footer>
+
+</div>
+
 </body>
 </html>
