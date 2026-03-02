@@ -286,7 +286,23 @@
       h1{ font-size:44px; }
       .sticky{ display:none; }
     }
-  </style>
+  
+    /* Header safety (mobile): prevent right-side pill from clipping */
+    .topbar{ gap:12px; }
+    .pill{
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    @media (max-width: 520px){
+      header{ padding-bottom: 2px; }
+      .topbar{ padding: 10px 0; }
+      .brand{ gap: 10px; }
+      .pill{ font-size: 12px; padding: 8px 10px; }
+    }
+
+</style>
 </head>
 
 <body>
@@ -305,8 +321,7 @@
 
       <div style="display:flex; align-items:center; gap:10px;">
         <div class="pill">Expo West 2026 • 30-second signup • No resume required (yet)</div>
-        <a class="btn" id="topCta" href="#" target="_blank" rel="noopener">Get Early Access</a>
-      </div>
+</div>
     </header>
 
     <main class="grid">
