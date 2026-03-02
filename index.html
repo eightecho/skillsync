@@ -286,8 +286,9 @@
 <body>
   <!-- Put your Google Form link here once, and it’s used everywhere -->
   <script>
-    window.SKILLSYNC_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfOmXytml4p1ZzapaBopAgTr2N7qdNKCsn5plunJmCn5u-PAw/viewform?usp=header";
-  </script>
+  // Google Form base (we'll append UTM params automatically)
+  window.SKILLSYNC_FORM_BASE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfOmXytml4p1ZzapaBopAgTr2N7qdNKCsn5plunJmCn5u-PAw/viewform?usp=pp_url";
+</script>
 
   <div class="wrap">
     <header>
@@ -297,7 +298,7 @@
       </div>
 
       <div style="display:flex; align-items:center; gap:10px;">
-        <div class="pill">30-second signup • No resume required (yet)</div>
+        <div class="pill">Expo West 2026 • 30-second signup • No resume required (yet)</div>
         <a class="btn" id="topCta" href="#" target="_blank" rel="noopener">Get Early Access</a>
       </div>
     </header>
@@ -420,11 +421,39 @@
     // Set year
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // UTM defaults for this event (kept minimal on purpose)
+    const DEFAULT_UTM = {
+      utm_source: "expowest2026",
+      utm_medium: "qr",
+      utm_campaign: "beta_launch"
+    };
+
+    function buildUtmParams() {
+      const qs = new URLSearchParams(window.location.search);
+      const utm = { ...DEFAULT_UTM };
+
+      // Only overwrite defaults if values exist in the URL
+      ["utm_source","utm_medium","utm_campaign"].forEach(k => {
+        const v = qs.get(k);
+        if (v && v.trim().length) utm[k] = v.trim();
+      });
+
+      const out = new URLSearchParams();
+      Object.entries(utm).forEach(([k,v]) => out.set(k, v));
+      return out;
+    }
+
+    // Build the final Google Form URL with UTM passthrough.
+    // Note: Google Forms will ignore these unless you later add hidden fields + prefill IDs,
+    // but keeping them on the URL preserves attribution for future upgrades.
+    const utmParams = buildUtmParams();
+    const base = window.SKILLSYNC_FORM_BASE_URL;
+    const formUrl = base + "&" + utmParams.toString();
+
     // Wire all CTAs to the same Google Form URL
-    const url = window.SKILLSYNC_FORM_URL;
     ["topCta","primaryCta","sideCta","bottomCta","stickyCta"].forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.href = url;
+      if (el) el.href = formUrl;
     });
   </script>
 </body>
